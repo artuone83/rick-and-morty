@@ -44,3 +44,75 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+https://docs.google.com/document/d/11DFXT9Sw3r_E8gI_FNH671a-69ojR4ax_-W3W4uM75E/edit
+
+## Objective:
+
+Develop an application that fetches character data from the Rick and Morty API, displays it in a responsive, paginated table using Material-UI, and allows users to view all character details in a modal dialog.
+
+## Requirements
+
+### Setup and Project Structure:
+
+Initialize a new React project with TypeScript and install necessary packages (create-react-app with TypeScript template, Material-UI, axios for API requests).
+Organize the project into components and utilities.
+
+### API Integration:
+
+Fetch character data from the Rick and Morty API (https://rickandmortyapi.com/api/character).
+
+### Components:
+
+- App Component: Serves as the container for all other components.
+- Character Table Component: Uses Material-UI's Table components to display characters. Include features for pagination, sorting, and editing.
+  - Columns needed:
+    - Image (circle avatar)
+    - Id
+    - Name
+    - Status
+    - Species
+- Character Details Dialog: A modal dialog that opens when the "Details" button in a table row is clicked, allowing users to view all of the character details.
+
+### Functionality:
+
+- Pagination: : Implement pagination to control the amount of data displayed at once, using Material-UI Pagination.
+- Sorting: Allow the user to sort the table by character ID, name, status, and species.
+- View Details: Each row should have a button that, when clicked, opens a modal dialog showing detailed information about the character in a nicely formatted way.
+
+### State Management:
+
+- Use React's Context API or useState and useEffect hooks to manage and persist state.
+- Optionally, use Redux for state management to show advanced skills
+
+### Types:
+
+- Define TypeScript interfaces or types for the character data and any props passed to components.
+
+### Styling:
+
+- Use Material-UI for all UI elements to ensure a cohesive look and feel.
+- Ensure the application is responsive and maintains layout integrity on different screen sizes.
+- Ensure the application is visually appealing and user-friendly.
+
+### Bonus (Optional)
+
+- Add filters (e.g., by status or species) to the table.
+- Enhance the modal dialog with animations or additional interactive elements.
+- Use Material-UI themes to customize the color scheme.
+- Use TanStack Query for data fetching
+
+### Deliverables:
+
+- A GitHub/Gitlab repository (or compressed file of a repository) containing the source code.
+- A ‘README.md’ file with instructions on how to set up and run the project, including any necessary installation steps
+
+### Evaluation criteria:
+
+- Correct implementation of features as per requirements.
+- Code quality, readability, and use of TypeScript for type safety.
+- Efficient use of Material-UI components and customization.
+- Implementation of the table's pagination and sorting features.
+- Creativity in UI/UX design and problem-solving approach.
+
+Happy coding!
