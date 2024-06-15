@@ -13,7 +13,7 @@ export const AppGlobalStyles = () => {
           margin: 0,
           padding: 0,
           fontFamily: "Roboto, sans-serif",
-          backgroundColor: "gray",
+          backgroundColor: "rgb(32, 35, 41)",
           display: "flex",
           flexDirection: "column",
         },

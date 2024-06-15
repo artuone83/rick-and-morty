@@ -2,7 +2,7 @@ import {
   QueryClient,
   QueryClientProvider as QueryProvider,
 } from "@tanstack/react-query";
-import { PropsWithRequiredChildren } from "../types/PropsWithRequiredChildren";
+import { PropsWithRequiredChildren } from "../types/types";
 
 const queryClient = new QueryClient();
 
