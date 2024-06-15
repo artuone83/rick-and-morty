@@ -41,9 +41,10 @@ export const Filters = ({
         <Grid item>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={onApplyFiltersClick}
             type="submit"
+            size="small"
           >
             Apply Filters
           </Button>
@@ -51,8 +52,9 @@ export const Filters = ({
         <Grid item>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={onClearFiltersClick}
+            size="small"
           >
             Clear Filters
           </Button>

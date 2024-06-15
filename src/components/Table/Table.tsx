@@ -8,6 +8,7 @@ import {
   TableRow,
   Paper,
   TableSortLabel,
+  Button,
 } from "@mui/material";
 import { Order } from "../../types/enums";
 import { getNestedValue } from "./utils/getNestedValue";
@@ -27,13 +28,18 @@ interface TableProps<T extends object> {
   columns: Column<T>[];
   pagination?: ReactNode;
   defaultSortBy?: keyof T;
+  rowActions?: {
+    name: string;
+    handler: (rowValue: T) => void;
+  }[];
 }
 
-export const Table = <T extends object>({
+export const Table = <T extends { id: string | number }>({
   data,
   columns,
   pagination,
   defaultSortBy,
+  rowActions,
 }: TableProps<T>): JSX.Element => {
   const [order, setOrder] = useState<Order>(Order.ASC);
   const [sortBy, setSortBy] = useState<string | null>(
@@ -74,7 +80,7 @@ export const Table = <T extends object>({
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column.accessor as string}>
+              <TableCell key={column.accessor}>
                 {column.sortable ? (
                   <TableSortLabel
                     active={sortBy === column.accessor}
@@ -88,11 +94,12 @@ export const Table = <T extends object>({
                 )}
               </TableCell>
             ))}
+            {rowActions && <TableCell />}
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedData.map((row, index) => (
-            <TableRow key={index}>
+          {sortedData.map((row) => (
+            <TableRow key={row.id}>
               {columns.map((column) => (
                 <TableCell key={column.accessor}>
                   {column.renderComponent
@@ -103,6 +110,21 @@ export const Table = <T extends object>({
                     : getNestedValue(row, column.accessor)}
                 </TableCell>
               ))}
+              {rowActions && (
+                <TableCell>
+                  {rowActions.map((action) => (
+                    <Button
+                      key={action.name}
+                      variant="outlined"
+                      color="info"
+                      onClick={() => action.handler(row)}
+                      size="small"
+                    >
+                      {action.name}
+                    </Button>
+                  ))}
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

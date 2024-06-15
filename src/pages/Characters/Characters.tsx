@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   Typography,
@@ -13,6 +13,7 @@ import { Character } from "../../api/types/interfaces";
 import { CharacterFilters } from "../../types/types";
 import { Column, Table } from "../../components/table/Table";
 import { Filters } from "./components/filters/Filters";
+import { useModalContext } from "../../providers/ModalProvider";
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -34,12 +35,15 @@ export const Characters = () => {
   const nameFilterInput = useRef<HTMLInputElement | null>(null);
   const speciesFilterInput = useRef<HTMLInputElement | null>(null);
   useRef(null);
+
   const [activeFilters, setActiveFilters] = useState<CharacterFilters>({
     name: "",
     species: "",
   });
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+  const { isModalOpen, setIsModalOpen } = useModalContext();
 
   const { data, error, isLoading } = useQuery({
     queryKey: [
@@ -57,7 +61,19 @@ export const Characters = () => {
     placeholderData: keepPreviousData,
   });
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const rowActions = useMemo(() => {
+    return [
+      {
+        name: "View",
+        handler: (rowValue: Character) => {
+          console.log("View", rowValue);
+          setIsModalOpen(true);
+        },
+      },
+    ];
+  }, [setIsModalOpen]);
+
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -104,7 +120,7 @@ export const Characters = () => {
 
   return (
     <>
-      <Typography variant="h4" mb={3}>
+      <Typography variant="h1" mb={3} fontSize="2rem">
         Rick and Morty Characters
       </Typography>
 
@@ -119,6 +135,7 @@ export const Characters = () => {
         data={displayedResults}
         columns={COLUMNS}
         defaultSortBy="name"
+        rowActions={rowActions}
         pagination={
           <TablePagination
             component="div"
@@ -131,6 +148,7 @@ export const Characters = () => {
           />
         }
       />
+      {isModalOpen && <div>Modal</div>}
     </>
   );
 };
