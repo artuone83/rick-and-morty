@@ -5,6 +5,7 @@ interface FiltersProps {
   speciesFilterInputRef: React.RefObject<HTMLInputElement>;
   onApplyFiltersClick: () => void;
   onClearFiltersClick: () => void;
+  disabled?: boolean;
 }
 
 export const Filters = ({
@@ -12,6 +13,7 @@ export const Filters = ({
   speciesFilterInputRef,
   onApplyFiltersClick,
   onClearFiltersClick,
+  disabled,
 }: FiltersProps): JSX.Element => {
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,6 +47,7 @@ export const Filters = ({
             onClick={onApplyFiltersClick}
             type="submit"
             size="small"
+            disabled={disabled}
           >
             Apply Filters
           </Button>
@@ -55,6 +58,7 @@ export const Filters = ({
             color="secondary"
             onClick={onClearFiltersClick}
             size="small"
+            disabled={disabled}
           >
             Clear Filters
           </Button>

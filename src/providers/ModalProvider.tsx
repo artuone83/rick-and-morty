@@ -1,24 +1,31 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
+import { PropsWithRequiredChildren } from "../types/types";
 
 interface ModalContextProps {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalContent: React.ReactNode;
+  setModalContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
 }
 
 const ModalContext = createContext<ModalContextProps>({
   isModalOpen: false,
-  setIsModalOpen: () => {},
+  setIsModalOpen: (): void => {},
+  modalContent: null,
+  setModalContent: (): void => {},
 });
 
-export const ModalProvider: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+export const ModalProvider = ({ children }: PropsWithRequiredChildren) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<React.ReactNode>(null);
+
+  const value = useMemo(
+    () => ({ isModalOpen, setIsModalOpen, modalContent, setModalContent }),
+    [isModalOpen, modalContent]
+  );
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
-      {children}
-    </ModalContext.Provider>
+    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
   );
 };
 

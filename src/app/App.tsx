@@ -9,11 +9,11 @@ const App = () => {
   return (
     <QueryClientProvider>
       <MaterialUiProvider>
-        <PageLayout>
-          <ModalProvider>
+        <ModalProvider>
+          <PageLayout>
             <Characters />
-          </ModalProvider>
-        </PageLayout>
+          </PageLayout>
+        </ModalProvider>
       </MaterialUiProvider>
     </QueryClientProvider>
   );

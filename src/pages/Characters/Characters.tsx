@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   Typography,
@@ -12,8 +12,10 @@ import { API_PATHS } from "../../api/const";
 import { Character } from "../../api/types/interfaces";
 import { CharacterFilters } from "../../types/types";
 import { Column, Table } from "../../components/table/Table";
-import { Filters } from "./components/filters/Filters";
+import { Filters } from "./components/Filters";
 import { useModalContext } from "../../providers/ModalProvider";
+import { setUrlSearchQuery } from "../../utils/setUrlSearchQuery";
+import { CharacterDetails } from "./components/CharacterDetails";
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -43,9 +45,9 @@ export const Characters = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
-  const { isModalOpen, setIsModalOpen } = useModalContext();
+  const { setIsModalOpen, setModalContent } = useModalContext();
 
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading, isFetching } = useQuery({
     queryKey: [
       API_PATHS.CHARACTERS,
       activeFilters.name,
@@ -66,12 +68,15 @@ export const Characters = () => {
       {
         name: "View",
         handler: (rowValue: Character) => {
-          console.log("View", rowValue);
           setIsModalOpen(true);
+          setModalContent(<CharacterDetails />);
+          setUrlSearchQuery({
+            id: rowValue.id.toString(),
+          });
         },
       },
     ];
-  }, [setIsModalOpen]);
+  }, [setIsModalOpen, setModalContent]);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -98,6 +103,8 @@ export const Characters = () => {
       name: "",
       species: "",
     }));
+    nameFilterInput.current!.blur();
+    speciesFilterInput.current!.blur();
     nameFilterInput.current!.value = "";
     speciesFilterInput.current!.value = "";
   };
@@ -129,6 +136,7 @@ export const Characters = () => {
         speciesFilterInputRef={speciesFilterInput}
         onApplyFiltersClick={handleApplyFilters}
         onClearFiltersClick={handleClearFilters}
+        disabled={isFetching}
       />
 
       <Table
@@ -148,7 +156,6 @@ export const Characters = () => {
           />
         }
       />
-      {isModalOpen && <div>Modal</div>}
     </>
   );
 };
