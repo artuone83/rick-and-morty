@@ -36,7 +36,7 @@ const COLUMNS: Column<Character>[] = [
 
 export const CharacterDetails = () => {
   const id = getUrlSearchQuery("id");
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading, status } = useQuery({
     queryKey: [`${API_PATHS.CHARACTERS}/${id}`],
     queryFn: () => fetchCharacterById(parseInt(id!)),
     enabled: !!id,
@@ -51,7 +51,11 @@ export const CharacterDetails = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <Typography variant="body1" color="error">
+        {status.toUpperCase()}: {error.message}
+      </Typography>
+    );
   }
 
   return data ? (

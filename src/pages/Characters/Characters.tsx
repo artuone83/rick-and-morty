@@ -61,7 +61,7 @@ export const Characters = () => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, error, isLoading, isFetching } = useQuery({
+  const { data, error, isLoading, isFetching, status } = useQuery({
     queryKey: [API_PATHS.CHARACTERS, filtersValues, page],
     queryFn: () =>
       fetchCharacters({
@@ -142,7 +142,7 @@ export const Characters = () => {
     errorContent = (
       <>
         <Typography variant="body1" color="error">
-          Failed to fetch characters
+          {status.toUpperCase()}: Failed to fetch characters
         </Typography>
         <Typography variant="body1" color="error">
           {error instanceof Error ? error.message : ""}
