@@ -14,10 +14,10 @@ import { Character } from "../../api/types/interfaces";
 import { CharacterFilters } from "../../types/types";
 import { Column, Table } from "../../components/table/Table";
 import { Filters } from "./components/Filters";
-import { useModalContext } from "../../providers/ModalProvider";
 import { setUrlSearchQuery } from "../../utils/setUrlSearchQuery";
 import { CharacterDetails } from "./components/CharacterDetails";
 import { deleteUrlSearchQuery } from "../../utils/deleteUrlSearchQuery";
+import Modal from "../../components/modal/Modal";
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -59,7 +59,7 @@ export const Characters = () => {
   );
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const { setIsModalOpen, setModalContent } = useModalContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, error, isLoading, isFetching } = useQuery({
     queryKey: [API_PATHS.CHARACTERS, filtersValues, page],
@@ -79,14 +79,13 @@ export const Characters = () => {
         name: "View",
         handler: (rowValue: Character) => {
           setIsModalOpen(true);
-          setModalContent(<CharacterDetails />);
           setUrlSearchQuery({
             id: rowValue.id.toString(),
           });
         },
       },
     ];
-  }, [setIsModalOpen, setModalContent]);
+  }, [setIsModalOpen]);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -130,6 +129,11 @@ export const Characters = () => {
       ...state,
       [event.target.name]: event.target.value,
     }));
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    deleteUrlSearchQuery();
   };
 
   let errorContent = null;
@@ -206,6 +210,10 @@ export const Characters = () => {
           }
         />
       )}
+
+      <Modal open={isModalOpen} onClose={handleCloseModal}>
+        <CharacterDetails />
+      </Modal>
     </>
   );
 };

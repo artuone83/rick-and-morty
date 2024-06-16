@@ -20,7 +20,6 @@ const COLUMNS: Column<Character>[] = [
       />
     ),
   },
-  { label: "Name", accessor: "name" },
   { label: "Status", accessor: "status" },
   { label: "Species", accessor: "species" },
   { label: "Gender", accessor: "gender" },
@@ -57,8 +56,8 @@ export const CharacterDetails = () => {
 
   return data ? (
     <>
-      <Typography variant="h6" component="p" mb={2}>
-        Details: {data.name}
+      <Typography variant="h5" component="p" mb={2} fontWeight="bold">
+        {data.name}
       </Typography>
       <Table data={[data]} columns={COLUMNS} />
     </>
