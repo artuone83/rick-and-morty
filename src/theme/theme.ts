@@ -1,68 +1,75 @@
 import { createTheme } from "@mui/material/styles";
+
+const DARK_BROWN = "#44281d";
+const LIGHT_ORANGE = "#e4a788";
+const YELLOW = "#f0e14a";
+const GREEN = "#97ce4c";
+const LIGHT_PINK = "#e89ac7";
+
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#44281d", // Dark brown
+      main: DARK_BROWN,
     },
     secondary: {
-      main: "#e4a788", // Light orange
+      main: LIGHT_ORANGE,
     },
     warning: {
-      main: "#f0e14a", // Yellow
+      main: YELLOW,
     },
     success: {
-      main: "#97ce4c", // Green
+      main: GREEN,
     },
     info: {
-      main: "#e89ac7", // Light pink
+      main: LIGHT_PINK,
     },
   },
   typography: {
     h1: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     h2: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     h3: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     h4: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     h5: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     h6: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     subtitle1: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     subtitle2: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     body1: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     body2: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     button: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     caption: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
     overline: {
-      color: "#44281d",
+      color: DARK_BROWN,
     },
   },
   components: {
     MuiTableCell: {
       styleOverrides: {
         root: {
-          color: "#44281d",
+          color: DARK_BROWN,
           padding: 8,
         },
         head: {
