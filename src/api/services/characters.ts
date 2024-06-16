@@ -6,14 +6,20 @@ export const fetchCharacters = async ({
   name,
   species,
   page,
+  status,
 }: CharacterFilters): Promise<Info<Character[]>> => {
   let url = `/${API_PATHS.CHARACTERS}?page=${page}`;
 
   if (name) {
     url += `&name=${name}`;
   }
+
   if (species) {
     url += `&species=${species}`;
+  }
+
+  if (status) {
+    url += `&species=${status}`;
   }
 
   const response = await api.get(url);

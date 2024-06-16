@@ -1,21 +1,30 @@
-import { Grid, TextField, Button, Box } from "@mui/material";
+import { Grid, TextField, Button, Box, CircularProgress } from "@mui/material";
+import { CharacterFilters } from "../../../types/types";
 
 interface FiltersProps {
   nameFilterInputRef: React.RefObject<HTMLInputElement>;
   statusFilterInputRef: React.RefObject<HTMLInputElement>;
   speciesFilterInputRef: React.RefObject<HTMLInputElement>;
+  buttonsDisabled: boolean;
+  filtersValues: CharacterFilters;
+  isFetching: boolean;
   onApplyFiltersClick: () => void;
   onClearFiltersClick: () => void;
-  disabled?: boolean;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 export const Filters = ({
   nameFilterInputRef,
   statusFilterInputRef,
   speciesFilterInputRef,
+  buttonsDisabled,
+  filtersValues,
+  isFetching,
   onApplyFiltersClick,
   onClearFiltersClick,
-  disabled,
+  onChange,
 }: FiltersProps): JSX.Element => {
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,6 +39,9 @@ export const Filters = ({
             inputRef={nameFilterInputRef}
             label="Name Filter"
             variant="outlined"
+            onChange={onChange}
+            name="name"
+            value={filtersValues?.name}
           />
         </Grid>
         <Grid item>
@@ -37,6 +49,9 @@ export const Filters = ({
             inputRef={statusFilterInputRef}
             label="Status Filter"
             variant="outlined"
+            onChange={onChange}
+            name="status"
+            value={filtersValues?.status}
           />
         </Grid>
         <Grid item>
@@ -44,6 +59,9 @@ export const Filters = ({
             inputRef={speciesFilterInputRef}
             label="Species Filter"
             variant="outlined"
+            onChange={onChange}
+            name="species"
+            value={filtersValues?.species}
           />
         </Grid>
       </Grid>
@@ -56,7 +74,8 @@ export const Filters = ({
             onClick={onApplyFiltersClick}
             type="submit"
             size="small"
-            disabled={disabled}
+            disabled={buttonsDisabled}
+            endIcon={isFetching ? <CircularProgress size={20} /> : null}
           >
             Apply Filters
           </Button>
@@ -67,7 +86,7 @@ export const Filters = ({
             color="secondary"
             onClick={onClearFiltersClick}
             size="small"
-            disabled={disabled}
+            disabled={buttonsDisabled}
           >
             Clear Filters
           </Button>

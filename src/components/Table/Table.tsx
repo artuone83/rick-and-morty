@@ -13,9 +13,13 @@ import {
 import { Order } from "../../types/enums";
 import { getNestedValue } from "./utils/getNestedValue";
 
+type CharacterAccessor<T> =
+  | (keyof T extends string ? keyof T : never)
+  | `${string & keyof T}.${string}`;
+
 export interface Column<T> {
   label: string;
-  accessor: string;
+  accessor: CharacterAccessor<T>;
   sortable?: boolean;
   renderComponent?: (accessorValue: unknown, rowValue: T) => ReactNode;
 }

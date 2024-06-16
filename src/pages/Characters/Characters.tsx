@@ -39,6 +39,12 @@ const COLUMNS: Column<Character>[] = [
   { label: "Location", accessor: "location.name", sortable: true },
 ];
 
+const FILTERS_DEFAULT_VALUES: CharacterFilters = {
+  name: "",
+  status: "",
+  species: "",
+};
+
 export const Characters = () => {
   const nameFilterInput = useRef<HTMLInputElement | null>(null);
   const statusFilterInput = useRef<HTMLInputElement | null>(null);
@@ -46,26 +52,22 @@ export const Characters = () => {
   useRef(null);
 
   const [activeFilters, setActiveFilters] = useState<CharacterFilters>({
-    name: undefined,
-    status: undefined,
-    species: undefined,
+    ...FILTERS_DEFAULT_VALUES,
   });
+  const [filtersValues, setFiltersValues] = useState<string>(
+    `${Object.values(activeFilters)}`
+  );
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-
   const { setIsModalOpen, setModalContent } = useModalContext();
 
   const { data, error, isLoading, isFetching } = useQuery({
-    queryKey: [
-      API_PATHS.CHARACTERS,
-      activeFilters.name,
-      activeFilters.species,
-      page,
-    ],
+    queryKey: [API_PATHS.CHARACTERS, filtersValues, page],
     queryFn: () =>
       fetchCharacters({
         name: activeFilters.name,
         species: activeFilters.species,
+        status: activeFilters.status,
         page: page + 1,
       }),
     placeholderData: keepPreviousData,
@@ -98,12 +100,7 @@ export const Characters = () => {
 
   const handleApplyFilters = () => {
     setPage(0);
-    setActiveFilters((state) => ({
-      ...state,
-      name: nameFilterInput.current?.value,
-      status: statusFilterInput.current?.value,
-      species: speciesFilterInput.current?.value,
-    }));
+    setFiltersValues(`${Object.values(activeFilters)}`);
     setUrlSearchQuery({
       name: nameFilterInput.current?.value ?? "",
       status: statusFilterInput.current?.value ?? "",
@@ -112,19 +109,27 @@ export const Characters = () => {
   };
 
   const handleClearFilters = () => {
-    setPage(0);
-    setActiveFilters(() => ({
-      name: "",
-      status: "",
-      species: "",
-    }));
     nameFilterInput.current!.blur();
     statusFilterInput.current!.blur();
     speciesFilterInput.current!.blur();
-    nameFilterInput.current!.value = "";
-    statusFilterInput.current!.value = "";
-    speciesFilterInput.current!.value = "";
+
+    const newFilters = {
+      ...FILTERS_DEFAULT_VALUES,
+    };
+
+    setPage(0);
+    setActiveFilters(newFilters);
+    setFiltersValues(`${Object.values(newFilters)}`);
     deleteUrlSearchQuery();
+  };
+
+  const handleFilterChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setActiveFilters((state) => ({
+      ...state,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   let errorContent = null;
@@ -142,6 +147,12 @@ export const Characters = () => {
     );
   }
 
+  const areFiltersButtonsDisabled =
+    isFetching ||
+    (!activeFilters.name && !activeFilters.status && !activeFilters.species);
+  const areFiltersFetching =
+    Object.values(activeFilters).some((value) => value) && isFetching;
+
   const totalResults = data?.info?.count ?? 0;
   const displayedResults = (data?.results || []).slice(0, rowsPerPage);
 
@@ -157,7 +168,10 @@ export const Characters = () => {
         speciesFilterInputRef={speciesFilterInput}
         onApplyFiltersClick={handleApplyFilters}
         onClearFiltersClick={handleClearFilters}
-        disabled={isFetching}
+        buttonsDisabled={areFiltersButtonsDisabled}
+        onChange={handleFilterChange}
+        filtersValues={activeFilters}
+        isFetching={areFiltersFetching}
       />
 
       {errorContent}
