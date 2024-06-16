@@ -21,7 +21,7 @@ export const fetchCharacters = async ({
   return response.data;
 };
 
-export const fetchCharacterById = async (id: number) => {
+export const fetchCharacterById = async (id: number): Promise<Character> => {
   const response = await api.get(`/${API_PATHS.CHARACTERS}/${id}`);
 
   return response.data;

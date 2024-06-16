@@ -5,6 +5,7 @@ import {
   CircularProgress,
   TablePagination,
   Avatar,
+  Box,
 } from "@mui/material";
 
 import { fetchCharacters } from "../../api/services/characters";
@@ -16,13 +17,18 @@ import { Filters } from "./components/Filters";
 import { useModalContext } from "../../providers/ModalProvider";
 import { setUrlSearchQuery } from "../../utils/setUrlSearchQuery";
 import { CharacterDetails } from "./components/CharacterDetails";
+import { deleteUrlSearchQuery } from "../../utils/deleteUrlSearchQuery";
 
 const COLUMNS: Column<Character>[] = [
   {
     label: "Image",
     accessor: "image",
     renderComponent: (value, rowValue) => (
-      <Avatar alt={rowValue.name} src={value} sx={{ width: 56, height: 56 }} />
+      <Avatar
+        alt={rowValue.name}
+        src={value as string}
+        sx={{ width: 56, height: 56 }}
+      />
     ),
   },
   { label: "Name", accessor: "name", sortable: true },
@@ -95,6 +101,10 @@ export const Characters = () => {
       name: nameFilterInput.current?.value ?? "",
       species: speciesFilterInput.current?.value ?? "",
     }));
+    setUrlSearchQuery({
+      name: nameFilterInput.current?.value ?? "",
+      species: speciesFilterInput.current?.value ?? "",
+    });
   };
 
   const handleClearFilters = () => {
@@ -107,18 +117,21 @@ export const Characters = () => {
     speciesFilterInput.current!.blur();
     nameFilterInput.current!.value = "";
     speciesFilterInput.current!.value = "";
+    deleteUrlSearchQuery();
   };
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  let errorContent = null;
 
   if (error) {
-    return (
-      <Typography variant="h6" color="error">
-        Failed to fetch characters
-        {error.message}
-      </Typography>
+    errorContent = (
+      <>
+        <Typography variant="body1" color="error">
+          Failed to fetch characters
+        </Typography>
+        <Typography variant="body1" color="error">
+          {error instanceof Error ? error.message : ""}
+        </Typography>
+      </>
     );
   }
 
@@ -139,23 +152,38 @@ export const Characters = () => {
         disabled={isFetching}
       />
 
-      <Table
-        data={displayedResults}
-        columns={COLUMNS}
-        defaultSortBy="name"
-        rowActions={rowActions}
-        pagination={
-          <TablePagination
-            component="div"
-            count={totalResults}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            rowsPerPageOptions={[10, 20]}
-          />
-        }
-      />
+      {errorContent}
+
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Table
+          data={displayedResults}
+          columns={COLUMNS}
+          defaultSortBy="name"
+          rowActions={rowActions}
+          pagination={
+            <TablePagination
+              component="div"
+              count={totalResults}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              rowsPerPageOptions={[10, 20]}
+            />
+          }
+        />
+      )}
     </>
   );
 };

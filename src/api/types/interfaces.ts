@@ -28,6 +28,12 @@ export interface Character extends ResourceBase {
   episode: string[];
 }
 
+export interface Episode extends ResourceBase {
+  air_date: string;
+  episode: string;
+  characters: string[];
+}
+
 export interface CharacterLocation {
   name: string;
   url: string;

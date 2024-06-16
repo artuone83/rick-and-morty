@@ -17,10 +17,7 @@ export interface Column<T> {
   label: string;
   accessor: string;
   sortable?: boolean;
-  renderComponent?: <U extends string>(
-    accessorValue: U,
-    rowValue: T
-  ) => ReactNode;
+  renderComponent?: (accessorValue: unknown, rowValue: T) => ReactNode;
 }
 
 interface TableProps<T extends object> {
@@ -46,8 +43,10 @@ export const Table = <T extends { id: string | number }>({
     typeof defaultSortBy === "string" ? defaultSortBy : null
   );
 
-  const sortedData = useMemo(() => {
-    if (!sortBy) return data;
+  const results = useMemo(() => {
+    if (!sortBy) {
+      return data;
+    }
 
     const sortedData = [...data].sort((a, b) => {
       const aValue = getNestedValue(a, sortBy);
@@ -98,7 +97,7 @@ export const Table = <T extends { id: string | number }>({
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedData.map((row) => (
+          {(results || []).map((row) => (
             <TableRow key={row.id}>
               {columns.map((column) => (
                 <TableCell key={column.accessor}>

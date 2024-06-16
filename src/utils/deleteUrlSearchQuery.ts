@@ -3,5 +3,5 @@ export const deleteUrlSearchQuery = () => {
   const baseUrl = currentUrl.split("?")[0];
   const newUrl = baseUrl;
 
-  window.history.replaceState({}, "", newUrl);
+  window.history.pushState({}, "", newUrl);
 };
