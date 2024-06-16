@@ -1,4 +1,4 @@
-import { Avatar, Box, CircularProgress } from "@mui/material";
+import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import { API_PATHS } from "../../../api/const";
@@ -6,7 +6,7 @@ import { fetchCharacterById } from "../../../api/services/characters";
 import { Character } from "../../../api/types/interfaces";
 import { Column, Table } from "../../../components/table/Table";
 import { getUrlSearchQuery } from "../../../utils/getUrlSearchQuery";
-import { EpisodesList } from "./EpisodesList";
+import { EpisodesListCell } from "../../../components/table/EpisodesListCell";
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -29,7 +29,9 @@ const COLUMNS: Column<Character>[] = [
   {
     label: "Episode",
     accessor: "episode",
-    renderComponent: (value) => <EpisodesList episodes={value as string[]} />,
+    renderComponent: (value) => (
+      <EpisodesListCell episodes={value as string[]} />
+    ),
   },
 ];
 
@@ -53,5 +55,12 @@ export const CharacterDetails = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  return data ? <Table data={[data]} columns={COLUMNS} /> : null;
+  return data ? (
+    <>
+      <Typography variant="h6" component="p" mb={2}>
+        Details: {data.name}
+      </Typography>
+      <Table data={[data]} columns={COLUMNS} />
+    </>
+  ) : null;
 };
