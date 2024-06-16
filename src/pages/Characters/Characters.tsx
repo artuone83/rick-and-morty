@@ -41,12 +41,14 @@ const COLUMNS: Column<Character>[] = [
 
 export const Characters = () => {
   const nameFilterInput = useRef<HTMLInputElement | null>(null);
+  const statusFilterInput = useRef<HTMLInputElement | null>(null);
   const speciesFilterInput = useRef<HTMLInputElement | null>(null);
   useRef(null);
 
   const [activeFilters, setActiveFilters] = useState<CharacterFilters>({
-    name: "",
-    species: "",
+    name: undefined,
+    status: undefined,
+    species: undefined,
   });
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -98,11 +100,13 @@ export const Characters = () => {
     setPage(0);
     setActiveFilters((state) => ({
       ...state,
-      name: nameFilterInput.current?.value ?? "",
-      species: speciesFilterInput.current?.value ?? "",
+      name: nameFilterInput.current?.value,
+      status: statusFilterInput.current?.value,
+      species: speciesFilterInput.current?.value,
     }));
     setUrlSearchQuery({
       name: nameFilterInput.current?.value ?? "",
+      status: statusFilterInput.current?.value ?? "",
       species: speciesFilterInput.current?.value ?? "",
     });
   };
@@ -111,11 +115,14 @@ export const Characters = () => {
     setPage(0);
     setActiveFilters(() => ({
       name: "",
+      status: "",
       species: "",
     }));
     nameFilterInput.current!.blur();
+    statusFilterInput.current!.blur();
     speciesFilterInput.current!.blur();
     nameFilterInput.current!.value = "";
+    statusFilterInput.current!.value = "";
     speciesFilterInput.current!.value = "";
     deleteUrlSearchQuery();
   };
@@ -146,6 +153,7 @@ export const Characters = () => {
 
       <Filters
         nameFilterInputRef={nameFilterInput}
+        statusFilterInputRef={statusFilterInput}
         speciesFilterInputRef={speciesFilterInput}
         onApplyFiltersClick={handleApplyFilters}
         onClearFiltersClick={handleClearFilters}

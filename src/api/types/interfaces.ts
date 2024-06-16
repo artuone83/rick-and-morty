@@ -18,10 +18,10 @@ export interface Info<T> {
 }
 
 export interface Character extends ResourceBase {
-  status: "Dead" | "Alive" | "unknown";
+  status: string;
   species: string;
   type: string;
-  gender: "Female" | "Male" | "Genderless" | "unknown";
+  gender: string;
   origin: CharacterLocation;
   location: CharacterLocation;
   image: string;

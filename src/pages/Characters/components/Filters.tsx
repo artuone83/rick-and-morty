@@ -2,6 +2,7 @@ import { Grid, TextField, Button, Box } from "@mui/material";
 
 interface FiltersProps {
   nameFilterInputRef: React.RefObject<HTMLInputElement>;
+  statusFilterInputRef: React.RefObject<HTMLInputElement>;
   speciesFilterInputRef: React.RefObject<HTMLInputElement>;
   onApplyFiltersClick: () => void;
   onClearFiltersClick: () => void;
@@ -10,6 +11,7 @@ interface FiltersProps {
 
 export const Filters = ({
   nameFilterInputRef,
+  statusFilterInputRef,
   speciesFilterInputRef,
   onApplyFiltersClick,
   onClearFiltersClick,
@@ -27,6 +29,13 @@ export const Filters = ({
           <TextField
             inputRef={nameFilterInputRef}
             label="Name Filter"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            inputRef={statusFilterInputRef}
+            label="Status Filter"
             variant="outlined"
           />
         </Grid>
