@@ -1,6 +1,65 @@
-# Getting Started with Create React App
+# Rick and Morty Character Explorer
+
+This is a React application that fetches character data from the [Rick and Morty API](https://rickandmortyapi.com/documentation/) and displays it in a responsive, paginated table using Material-UI. Users can also view detailed information about each character in a modal dialog.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Features
+
+- Fetches character data from the Rick and Morty API
+- Displays characters in a responsive, paginated table
+- Allows sorting the table by character ID, name, status, and species
+- Provides a modal dialog to view detailed information about each character
+- Responsive design for different screen sizes
+- TypeScript for type safety
+
+## Dependencies
+
+This project uses the following dependencies:
+
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [Material-UI](https://mui.com/material-ui/)
+- [Axios (for API requests)](https://axios-http.com/docs/intro)
+- [TanStack Query](https://tanstack.com/)
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+https://github.com/artuone83/rick-and-morty
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd rick-and-morty-explorer
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+This will start the application at `http://localhost:3000`.
+
+## Usage
+
+To start the development server, run:
+
+```bash
+npm start
+```
+
+## Building for Production
+
+To build the application for production, run:
+
+```bash
+npm run build
+```
 
 ## Available Scripts
 
@@ -38,14 +97,6 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-https://docs.google.com/document/d/11DFXT9Sw3r_E8gI_FNH671a-69ojR4ax_-W3W4uM75E/edit
 
 ## Objective:
 
