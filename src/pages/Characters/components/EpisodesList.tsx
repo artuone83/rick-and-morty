@@ -44,8 +44,6 @@ export const EpisodesList = ({ episodes }: { episodes: string[] }) => {
     <List
       dense
       sx={{
-        width: "100%",
-        maxWidth: 250,
         position: "relative",
         overflow: "auto",
         maxHeight: 350,

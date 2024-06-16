@@ -1,4 +1,4 @@
-import { Modal, IconButton, Paper } from "@mui/material";
+import { Modal, IconButton, Paper, Box } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 
 interface ModalProps {
@@ -15,7 +15,7 @@ const boxStyle = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  width: { xs: "90%", md: "60%" },
+  width: { xs: "90%", md: "75%" },
   minHeight: 400,
 };
 
@@ -44,7 +44,7 @@ const CharacterModal = ({
         >
           <CloseIcon />
         </IconButton>
-        {children}
+        <Box mt={4}>{children}</Box>
       </Paper>
     </Modal>
   );
