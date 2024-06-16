@@ -10,7 +10,7 @@ import {
   TableSortLabel,
   Button,
 } from "@mui/material";
-import { Order } from "../../types/enums";
+import { Order } from "types/enums";
 import { getNestedValue } from "./utils/getNestedValue";
 
 type CharacterAccessor<T> =

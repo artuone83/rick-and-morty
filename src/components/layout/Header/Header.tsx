@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { ReactComponent as Logo } from "../../../assets/icons/ramlogo.svg";
+import { ReactComponent as Logo } from "assets/icons/ramlogo.svg";
 
 export const Header = (): JSX.Element => {
   return (

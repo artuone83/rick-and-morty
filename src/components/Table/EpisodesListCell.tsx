@@ -7,9 +7,9 @@ import {
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
-import { api } from "../../api/api";
-import { API_PATHS } from "../../api/const";
-import { Episode } from "../../api/types/interfaces";
+import { api } from "api/api";
+import { API_PATHS } from "api/const";
+import { Episode } from "api/types/interfaces";
 
 interface EpisodesListCellProps {
   episodes: string[];

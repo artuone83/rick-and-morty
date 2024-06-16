@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { PropsWithRequiredChildren } from "../../../types/types";
+import { PropsWithRequiredChildren } from "types/types";
 
 export const Main = ({ children }: PropsWithRequiredChildren) => {
   return (

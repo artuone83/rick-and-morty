@@ -1,5 +1,5 @@
 import { Grid, TextField, Button, Box, CircularProgress } from "@mui/material";
-import { CharacterFilters } from "../../../types/types";
+import { CharacterFilters } from "types/types";
 
 interface FiltersProps {
   nameFilterInputRef: React.RefObject<HTMLInputElement>;

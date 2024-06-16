@@ -8,16 +8,16 @@ import {
   Box,
 } from "@mui/material";
 
-import { fetchCharacters } from "../../api/services/characters";
-import { API_PATHS } from "../../api/const";
-import { Character } from "../../api/types/interfaces";
-import { CharacterFilters } from "../../types/types";
-import { Column, Table } from "../../components/table/Table";
+import { fetchCharacters } from "api/services/characters";
+import { API_PATHS } from "api/const";
+import { Character } from "api/types/interfaces";
+import { CharacterFilters } from "types/types";
+import { Column, Table } from "components/table/Table";
 import { Filters } from "./components/Filters";
-import { setUrlSearchQuery } from "../../utils/setUrlSearchQuery";
+import { setUrlSearchQuery } from "utils/setUrlSearchQuery";
 import { CharacterDetails } from "./components/CharacterDetails";
-import { deleteUrlSearchQuery } from "../../utils/deleteUrlSearchQuery";
-import Modal from "../../components/modal/Modal";
+import { deleteUrlSearchQuery } from "utils/deleteUrlSearchQuery";
+import Modal from "components/modal/Modal";
 
 const COLUMNS: Column<Character>[] = [
   {
