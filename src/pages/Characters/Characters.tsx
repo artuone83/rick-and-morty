@@ -18,6 +18,7 @@ import { setUrlSearchQuery } from "utils/setUrlSearchQuery";
 import { CharacterDetails } from "./components/CharacterDetails";
 import { deleteUrlSearchQuery } from "utils/deleteUrlSearchQuery";
 import Modal from "components/modal/Modal";
+import { deleteUrlSearchQueryByKey } from "utils/deleteUrlSearchQueryByKey";
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -89,6 +90,9 @@ export const Characters = () => {
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
+    setUrlSearchQuery({
+      page: `${newPage}`,
+    });
   };
 
   const handleChangeRowsPerPage = (
@@ -133,7 +137,7 @@ export const Characters = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    deleteUrlSearchQuery();
+    deleteUrlSearchQueryByKey(["id"]);
   };
 
   let errorContent = null;

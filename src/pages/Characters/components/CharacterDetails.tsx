@@ -35,7 +35,7 @@ const COLUMNS: Column<Character>[] = [
 ];
 
 export const CharacterDetails = () => {
-  const id = getUrlSearchQuery("id");
+  const [id] = getUrlSearchQuery(["id"]);
   const { data, error, isLoading, status } = useQuery({
     queryKey: [`${API_PATHS.CHARACTERS}/${id}`],
     queryFn: () => fetchCharacterById(parseInt(id!)),

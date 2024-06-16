@@ -34,7 +34,7 @@ https://github.com/artuone83/rick-and-morty
 2. Navigate to the project directory:
 
 ```bash
-cd rick-and-morty-explorer
+cd rick-and-morty
 ```
 
 3. Install the dependencies:
