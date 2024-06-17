@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Typography, CircularProgress, TablePagination, Avatar, Box } from '@mui/material';
 
@@ -13,6 +13,7 @@ import { CharacterDetails } from './components/CharacterDetails';
 import { deleteUrlSearchQuery } from 'utils/deleteUrlSearchQuery';
 import Modal from 'components/modal/Modal';
 import { deleteUrlSearchQueryByKey } from 'utils/deleteUrlSearchQueryByKey';
+import { getUrlSearchQuery } from 'utils/getUrlSearchQuery';
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -61,6 +62,14 @@ export const Characters = () => {
       }),
     placeholderData: keepPreviousData,
   });
+
+  useEffect(() => {
+    const [pageFromUrl] = getUrlSearchQuery(['page']);
+
+    if (pageFromUrl !== null) {
+      setPage(parseInt(pageFromUrl, 10));
+    }
+  }, []);
 
   const rowActions = useMemo(() => {
     return [
