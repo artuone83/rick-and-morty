@@ -1,9 +1,9 @@
 import Container from "@mui/material/Container";
 
 import { PropsWithRequiredChildren } from "types/types";
-import { Header } from "../header/Header";
-import { Main } from "../main/Main";
-import { Footer } from "../footer/Footer";
+import { Header } from "components/layout/header/Header";
+import { Main } from "components/layout/main/Main";
+import { Footer } from "components/layout/footer/Footer";
 
 export const PageLayout = ({
   children,

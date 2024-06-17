@@ -1,5 +1,9 @@
 # Rick and Morty Character Explorer
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fe3f1c7e-6572-4434-ba43-dd3e5aa14d4f/deploy-status)](https://app.netlify.com/sites/rick-and-morty-characters-explorer/deploys)
+
+App online address: [Rick and Morty Characters](https://rick-and-morty-characters-explorer.netlify.app)
+
 This is a React application that fetches character data from the [Rick and Morty API](https://rickandmortyapi.com/documentation/) and displays it in a responsive, paginated table using Material-UI. Users can also view detailed information about each character in a modal dialog.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

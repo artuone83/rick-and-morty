@@ -1,8 +1,8 @@
-import { QueryClientProvider } from "../providers/QueryClientProvider";
-import { MaterialUiProvider } from "../providers/MaterialUiProvider";
+import { QueryClientProvider } from "providers/QueryClientProvider";
+import { MaterialUiProvider } from "providers/MaterialUiProvider";
 
-import { Characters } from "../pages/characters/Characters";
-import { PageLayout } from "../components/layout/pageLayout/PageLayout";
+import { Characters } from "pages/characters/Characters";
+import { PageLayout } from "components/layout/pageLayout/PageLayout";
 
 const App = () => {
   return (
