@@ -2,11 +2,11 @@ import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import { API_PATHS } from "api/const";
-import { fetchCharacterById } from "api/services/characters";
+import { fetchCharacterById } from "api/services/Characters";
 import { Character } from "api/types/interfaces";
-import { Column, Table } from "components/table/Table";
+import { Column, Table } from "components/Table/Table";
 import { getUrlSearchQuery } from "utils/getUrlSearchQuery";
-import { EpisodesListCell } from "components/table/EpisodesListCell";
+import { EpisodesListCell } from "components/Table/EpisodesListCell";
 
 const COLUMNS: Column<Character>[] = [
   {

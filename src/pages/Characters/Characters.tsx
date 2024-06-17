@@ -8,11 +8,11 @@ import {
   Box,
 } from "@mui/material";
 
-import { fetchCharacters } from "api/services/characters";
+import { fetchCharacters } from "api/services/Characters";
 import { API_PATHS } from "api/const";
 import { Character } from "api/types/interfaces";
 import { CharacterFilters } from "types/types";
-import { Column, Table } from "components/table/Table";
+import { Column, Table } from "components/Table/Table";
 import { Filters } from "./components/Filters";
 import { setUrlSearchQuery } from "utils/setUrlSearchQuery";
 import { CharacterDetails } from "./components/CharacterDetails";
