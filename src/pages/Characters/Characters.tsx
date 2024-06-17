@@ -74,7 +74,7 @@ export const Characters = () => {
         },
       },
     ];
-  }, [setIsModalOpen]);
+  }, []);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -173,8 +173,7 @@ export const Characters = () => {
             justifyContent: 'center',
             alignItems: 'center',
             flex: 1,
-          }}
-        >
+          }}>
           <CircularProgress />
         </Box>
       ) : (
