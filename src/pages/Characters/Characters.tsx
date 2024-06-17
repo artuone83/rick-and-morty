@@ -96,9 +96,9 @@ export const Characters = () => {
     setPage(0);
     setFiltersValues(`${Object.values(activeFilters)}`);
     setUrlSearchQuery({
-      name: nameFilterInput.current?.value ?? '',
-      status: statusFilterInput.current?.value ?? '',
-      species: speciesFilterInput.current?.value ?? '',
+      name: activeFilters.name ?? '',
+      status: activeFilters.status ?? '',
+      species: activeFilters.species ?? '',
     });
   };
 

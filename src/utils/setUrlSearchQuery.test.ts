@@ -41,4 +41,10 @@ describe('setUrlSearchQuery', () => {
     setUrlSearchQuery({ key: 'newValue' });
     expect(window.location.search).toBe('?key=newValue');
   });
+
+  it('should remove a query parameter', () => {
+    window.history.pushState({}, '', '/?key=value');
+    setUrlSearchQuery({ key: '' });
+    expect(window.location.search).toBe('');
+  });
 });

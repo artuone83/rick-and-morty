@@ -4,6 +4,8 @@ export const setUrlSearchQuery = (obj: Record<string, string>): void => {
   Object.entries(obj).forEach(([key, value]) => {
     if (value) {
       searchParams.set(key, value);
+    } else {
+      searchParams.delete(key);
     }
   });
 
