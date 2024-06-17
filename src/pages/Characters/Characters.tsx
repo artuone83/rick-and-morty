@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 
-import { fetchCharacters } from "api/services/Characters";
+import { fetchCharacters } from "api/services/characters";
 import { API_PATHS } from "api/const";
 import { Character } from "api/types/interfaces";
 import { CharacterFilters } from "types/types";
