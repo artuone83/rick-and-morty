@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Typography, CircularProgress, TablePagination, Avatar, Box } from '@mui/material';
 
@@ -13,8 +13,8 @@ import { CharacterDetails } from './components/CharacterDetails';
 import { deleteUrlSearchQuery } from 'utils/deleteUrlSearchQuery';
 import Modal from 'components/modal/Modal';
 import { deleteUrlSearchQueryByKey } from 'utils/deleteUrlSearchQueryByKey';
-import { getUrlSearchQuery } from 'utils/getUrlSearchQuery';
 import { useUrlSearchQueryFilters } from 'hooks/useUrlSearchQueryFilters';
+import { PageCounter } from 'components/Table/PageCounter';
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -59,7 +59,7 @@ export const Characters = () => {
         name: activeFilters.name,
         species: activeFilters.species,
         status: activeFilters.status,
-        page: page ? page + 1 : undefined,
+        page: page !== null ? page + 1 : undefined,
       }),
     placeholderData: keepPreviousData,
     enabled: page !== null || Object.values(activeFilters).some((value) => value),
@@ -148,8 +148,15 @@ export const Characters = () => {
     isFetching || (!activeFilters.name && !activeFilters.status && !activeFilters.species);
   const areFiltersFetching = Object.values(activeFilters).some((value) => value) && isFetching;
 
-  const totalResults = data?.info?.count ?? 0;
+  let totalRows = data?.info?.count ?? 0;
+
+  if (rowsPerPage === 10) {
+    totalRows = Math.ceil(totalRows / 2);
+  }
+
+  const totalPages = data?.info?.pages ?? 0;
   const displayedResults = (data?.results || []).slice(0, rowsPerPage);
+  const labelDisplayPages = () => <PageCounter currentPage={page !== null ? page + 1 : 1} totalPages={totalPages} />;
 
   return (
     <>
@@ -190,12 +197,15 @@ export const Characters = () => {
           pagination={
             <TablePagination
               component="div"
-              count={totalResults}
+              count={totalRows}
               page={page || 0}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[10, 20]}
+              labelDisplayedRows={labelDisplayPages}
+              showFirstButton
+              showLastButton
             />
           }
         />
