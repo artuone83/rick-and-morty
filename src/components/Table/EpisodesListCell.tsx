@@ -1,27 +1,19 @@
-import {
-  CircularProgress,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { CircularProgress, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
-import { api } from "api/api";
-import { API_PATHS } from "api/const";
-import { Episode } from "api/types/interfaces";
+import { api } from 'api/api';
+import { API_PATHS } from 'api/const';
+import { Episode } from 'api/types/interfaces';
 
 interface EpisodesListCellProps {
   episodes: string[];
 }
 
-export const EpisodesListCell = ({
-  episodes,
-}: EpisodesListCellProps): JSX.Element => {
+export const EpisodesListCell = ({ episodes }: EpisodesListCellProps): JSX.Element => {
   const { data, isLoading, error } = useQuery({
     queryKey: [API_PATHS.EPISODES],
     queryFn: async (): Promise<Episode[]> => {
-      const ids = episodes.map((url) => new URL(url).pathname.split("/").pop());
+      const ids = episodes.map((url) => new URL(url).pathname.split('/').pop());
 
       const response = await api.get(`/${API_PATHS.EPISODES}/${ids}`);
 
@@ -49,8 +41,8 @@ export const EpisodesListCell = ({
     <List
       dense
       sx={{
-        position: "relative",
-        overflow: "auto",
+        position: 'relative',
+        overflow: 'auto',
         minWidth: 250,
         maxHeight: 350,
         padding: 0,

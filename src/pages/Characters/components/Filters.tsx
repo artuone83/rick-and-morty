@@ -1,5 +1,5 @@
-import { Grid, TextField, Button, Box, CircularProgress } from "@mui/material";
-import { CharacterFilters } from "types/types";
+import { Grid, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { CharacterFilters } from 'types/types';
 
 interface FiltersProps {
   nameFilterInputRef: React.RefObject<HTMLInputElement>;
@@ -10,9 +10,7 @@ interface FiltersProps {
   isFetching: boolean;
   onApplyFiltersClick: () => void;
   onClearFiltersClick: () => void;
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export const Filters = ({

@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo, useState } from "react";
+import React, { ReactNode, useMemo, useState } from 'react';
 import {
   Table as MuiTable,
   TableBody,
@@ -9,13 +9,11 @@ import {
   Paper,
   TableSortLabel,
   Button,
-} from "@mui/material";
-import { Order } from "types/enums";
-import { getNestedValue } from "./utils/getNestedValue";
+} from '@mui/material';
+import { Order } from 'types/enums';
+import { getNestedValue } from './utils/getNestedValue';
 
-type CharacterAccessor<T> =
-  | (keyof T extends string ? keyof T : never)
-  | `${string & keyof T}.${string}`;
+type CharacterAccessor<T> = (keyof T extends string ? keyof T : never) | `${string & keyof T}.${string}`;
 
 export interface Column<T> {
   label: string;
@@ -43,9 +41,7 @@ export const Table = <T extends { id: string | number }>({
   rowActions,
 }: TableProps<T>): JSX.Element => {
   const [order, setOrder] = useState<Order>(Order.ASC);
-  const [sortBy, setSortBy] = useState<string | null>(
-    typeof defaultSortBy === "string" ? defaultSortBy : null
-  );
+  const [sortBy, setSortBy] = useState<string | null>(typeof defaultSortBy === 'string' ? defaultSortBy : null);
 
   const results = useMemo(() => {
     if (!sortBy) {
@@ -106,10 +102,7 @@ export const Table = <T extends { id: string | number }>({
               {columns.map((column) => (
                 <TableCell key={column.accessor}>
                   {column.renderComponent
-                    ? column.renderComponent(
-                        getNestedValue(row, column.accessor),
-                        row
-                      )
+                    ? column.renderComponent(getNestedValue(row, column.accessor), row)
                     : getNestedValue(row, column.accessor)}
                 </TableCell>
               ))}

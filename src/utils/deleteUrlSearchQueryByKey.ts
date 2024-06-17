@@ -1,6 +1,6 @@
 export const deleteUrlSearchQueryByKey = (keys: string[]) => {
   const currentUrl = window.location.href;
-  const baseUrl = currentUrl.split("?")[0];
+  const baseUrl = currentUrl.split('?')[0];
   const searchParams = new URLSearchParams(window.location.search);
 
   keys.forEach((key) => {
@@ -11,6 +11,6 @@ export const deleteUrlSearchQueryByKey = (keys: string[]) => {
   console.log(searchParams.toString());
 
   if (newUrl !== currentUrl) {
-    window.history.pushState({}, "", newUrl);
+    window.history.pushState({}, '', newUrl);
   }
 };

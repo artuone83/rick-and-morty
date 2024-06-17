@@ -1,10 +1,10 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
-const DARK_BROWN = "#44281d";
-const LIGHT_ORANGE = "#e4a788";
-const YELLOW = "#f0e14a";
-const GREEN = "#97ce4c";
-const LIGHT_PINK = "#e89ac7";
+const DARK_BROWN = '#44281d';
+const LIGHT_ORANGE = '#e4a788';
+const YELLOW = '#f0e14a';
+const GREEN = '#97ce4c';
+const LIGHT_PINK = '#e89ac7';
 
 export const theme = createTheme({
   palette: {
@@ -73,20 +73,20 @@ export const theme = createTheme({
           padding: 8,
         },
         head: {
-          fontWeight: "bolder",
+          fontWeight: 'bolder',
         },
       },
     },
     MuiTableRow: {
       styleOverrides: {
         root: {
-          "&:hover": {
-            backgroundColor: "rgb(240, 225, 74, 0.25)",
+          '&:hover': {
+            backgroundColor: 'rgb(240, 225, 74, 0.25)',
           },
         },
         head: {
-          "&:hover": {
-            backgroundColor: "transparent",
+          '&:hover': {
+            backgroundColor: 'transparent',
           },
         },
       },

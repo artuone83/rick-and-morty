@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
-import { ReactComponent as Logo } from "assets/icons/ramlogo.svg";
+import { Box } from '@mui/material';
+import { ReactComponent as Logo } from 'assets/icons/ramlogo.svg';
 
 export const Header = (): JSX.Element => {
   return (
@@ -8,11 +8,11 @@ export const Header = (): JSX.Element => {
       py={2}
       mb={1}
       sx={{
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         gap: 2,
-        position: "relative",
+        position: 'relative',
       }}
     >
       <Logo width={60} height={60} />

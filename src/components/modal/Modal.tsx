@@ -1,5 +1,5 @@
-import { Modal, IconButton, Paper, Box } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import { Modal, IconButton, Paper, Box } from '@mui/material';
+import { Close as CloseIcon } from '@mui/icons-material';
 
 interface ModalProps {
   open: boolean;
@@ -8,22 +8,18 @@ interface ModalProps {
 }
 
 const boxStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
-  width: { xs: "90%", md: "75%" },
+  width: { xs: '90%', md: '75%' },
   minHeight: 400,
 };
 
-const CharacterModal = ({
-  open,
-  onClose,
-  children,
-}: ModalProps): JSX.Element => {
+const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element => {
   return (
     <Modal
       open={open}
@@ -31,10 +27,10 @@ const CharacterModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Paper sx={boxStyle}>
@@ -42,7 +38,7 @@ const CharacterModal = ({
           aria-label="close"
           onClick={onClose}
           sx={{
-            position: "absolute",
+            position: 'absolute',
             right: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],

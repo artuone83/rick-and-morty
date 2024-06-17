@@ -9,5 +9,5 @@ export const setUrlSearchQuery = (obj: Record<string, string>): void => {
 
   const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
 
-  window.history.pushState({}, "", newUrl);
+  window.history.pushState({}, '', newUrl);
 };

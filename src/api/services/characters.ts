@@ -1,6 +1,6 @@
-import { api } from "../api";
-import { API_PATHS } from "../const";
-import { Character, CharacterFilters, Info } from "../types/interfaces";
+import { api } from '../api';
+import { API_PATHS } from '../const';
+import { Character, CharacterFilters, Info } from '../types/interfaces';
 
 export const fetchCharacters = async ({
   name,
