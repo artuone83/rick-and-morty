@@ -26,5 +26,5 @@ export const useUrlSearchQueryFilters = (
     } else {
       setPage(0);
     }
-  }, []);
+  }, [setPage, setActiveFilters]);
 };
