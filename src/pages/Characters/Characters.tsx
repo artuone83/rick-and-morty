@@ -14,6 +14,7 @@ import { deleteUrlSearchQuery } from 'utils/deleteUrlSearchQuery';
 import Modal from 'components/modal/Modal';
 import { deleteUrlSearchQueryByKey } from 'utils/deleteUrlSearchQueryByKey';
 import { getUrlSearchQuery } from 'utils/getUrlSearchQuery';
+import { useUrlSearchQueryFilters } from 'hooks/useUrlSearchQueryFilters';
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -58,33 +59,13 @@ export const Characters = () => {
         name: activeFilters.name,
         species: activeFilters.species,
         status: activeFilters.status,
-        page: (page ?? 0) + 1,
+        page: page ? page + 1 : undefined,
       }),
     placeholderData: keepPreviousData,
     enabled: page !== null || Object.values(activeFilters).some((value) => value),
   });
 
-  useEffect(() => {
-    const [pageFilter, nameFilter, statusFilter, speciesFilter] = getUrlSearchQuery([
-      'page',
-      'name',
-      'status',
-      'species',
-    ]);
-    const activeFiltersInUrl = [nameFilter, statusFilter, speciesFilter].some((value) => value);
-
-    if (pageFilter !== null && !activeFiltersInUrl) {
-      setPage(parseInt(pageFilter, 10));
-    } else if (activeFiltersInUrl) {
-      setActiveFilters({
-        name: nameFilter ?? '',
-        status: statusFilter ?? '',
-        species: speciesFilter ?? '',
-      });
-    } else {
-      setPage(0);
-    }
-  }, []);
+  useUrlSearchQueryFilters(setPage, setActiveFilters);
 
   const rowActions = useMemo(() => {
     return [
