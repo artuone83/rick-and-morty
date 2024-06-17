@@ -47,8 +47,6 @@ cd rick-and-morty
 npm install
 ```
 
-This will start the application at `http://localhost:3000`.
-
 ## Usage
 
 To start the development server, run:
@@ -56,6 +54,8 @@ To start the development server, run:
 ```bash
 npm start
 ```
+
+This will start the application at `http://localhost:3000`.
 
 ## Building for Production
 
@@ -169,5 +169,3 @@ Fetch character data from the Rick and Morty API (https://rickandmortyapi.com/ap
 - Efficient use of Material-UI components and customization.
 - Implementation of the table's pagination and sorting features.
 - Creativity in UI/UX design and problem-solving approach.
-
-Happy coding!
