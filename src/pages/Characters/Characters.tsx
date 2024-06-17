@@ -47,7 +47,7 @@ export const Characters = () => {
     ...FILTERS_DEFAULT_VALUES,
   });
   const [filtersValues, setFiltersValues] = useState<string>(`${Object.values(activeFilters)}`);
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number | null>(null);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -58,16 +58,31 @@ export const Characters = () => {
         name: activeFilters.name,
         species: activeFilters.species,
         status: activeFilters.status,
-        page: page + 1,
+        page: (page ?? 0) + 1,
       }),
     placeholderData: keepPreviousData,
+    enabled: page !== null || Object.values(activeFilters).some((value) => value),
   });
 
   useEffect(() => {
-    const [pageFromUrl] = getUrlSearchQuery(['page']);
+    const [pageFilter, nameFilter, statusFilter, speciesFilter] = getUrlSearchQuery([
+      'page',
+      'name',
+      'status',
+      'species',
+    ]);
+    const activeFiltersInUrl = [nameFilter, statusFilter, speciesFilter].some((value) => value);
 
-    if (pageFromUrl !== null) {
-      setPage(parseInt(pageFromUrl, 10));
+    if (pageFilter !== null && !activeFiltersInUrl) {
+      setPage(parseInt(pageFilter, 10));
+    } else if (activeFiltersInUrl) {
+      setActiveFilters({
+        name: nameFilter ?? '',
+        status: statusFilter ?? '',
+        species: speciesFilter ?? '',
+      });
+    } else {
+      setPage(0);
     }
   }, []);
 
@@ -195,7 +210,7 @@ export const Characters = () => {
             <TablePagination
               component="div"
               count={totalResults}
-              page={page}
+              page={page || 0}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}

@@ -2,7 +2,7 @@ export interface CharacterFilters {
   name?: string;
   species?: string;
   status?: string;
-  page: number;
+  page?: number;
 }
 
 export interface Info<T> {

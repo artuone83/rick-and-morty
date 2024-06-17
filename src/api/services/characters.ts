@@ -2,27 +2,20 @@ import { api } from '../api';
 import { API_PATHS } from '../const';
 import { Character, CharacterFilters, Info } from '../types/interfaces';
 
-export const fetchCharacters = async ({
-  name,
-  species,
-  page,
-  status,
-}: CharacterFilters): Promise<Info<Character[]>> => {
-  let url = `/${API_PATHS.CHARACTERS}?page=${page}`;
+export const getKeyValueUrlFiltersList = (filters: CharacterFilters): string[] => {
+  return Object.entries(filters).reduce<string[]>((acc, [key, value]) => {
+    if (value) {
+      acc.push(`${key}=${value}`);
+    }
+    return acc;
+  }, []);
+};
 
-  if (name) {
-    url += `&name=${name}`;
-  }
+export const fetchCharacters = async (filters: CharacterFilters): Promise<Info<Character[]>> => {
+  const urlPath = `/${API_PATHS.CHARACTERS}/`;
+  const keyValueUrlFiltersList = getKeyValueUrlFiltersList(filters);
 
-  if (species) {
-    url += `&species=${species}`;
-  }
-
-  if (status) {
-    url += `&species=${status}`;
-  }
-
-  const response = await api.get(url);
+  const response = await api.get([urlPath, keyValueUrlFiltersList.join('&')].join('?'));
 
   return response.data;
 };
