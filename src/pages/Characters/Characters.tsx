@@ -54,7 +54,7 @@ export const Characters = () => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, error, isLoading, isFetching, status } = useQuery({
+  const { data, error, isLoading, isFetching, status, isError } = useQuery({
     queryKey: [API_PATHS.CHARACTERS, filtersValues, page],
     queryFn: () =>
       fetchCharacters({
@@ -143,7 +143,9 @@ export const Characters = () => {
 
   const totalPages = data?.info?.pages ?? 0;
   const displayedResults = (data?.results || []).slice(0, rowsPerPage);
-  const labelDisplayPages = () => <PageCounter currentPage={page === null ? 0 : page + 1} totalPages={totalPages} />;
+  const labelDisplayPages = () => (
+    <PageCounter currentPage={page === null ? 1 : page + 1} totalPages={totalPages} isError={isError} />
+  );
 
   return (
     <>
