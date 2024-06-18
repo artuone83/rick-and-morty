@@ -131,9 +131,9 @@ export const Characters = () => {
     deleteUrlSearchQueryByKey(['id']);
   };
 
-  const areFiltersButtonsDisabled =
-    isFetching || (!activeFilters.name && !activeFilters.status && !activeFilters.species);
-  const areFiltersFetching = Object.values(activeFilters).some((value) => value) && isFetching;
+  const areFiltersInUse = Object.values(activeFilters).some((value) => value);
+  const areFiltersButtonsDisabled = isFetching || !areFiltersInUse;
+  const areFiltersFetching = areFiltersInUse && isFetching;
 
   let totalRows = data?.info?.count ?? 0;
 
