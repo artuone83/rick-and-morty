@@ -31,6 +31,7 @@ interface TableProps<T extends object> {
     name: string;
     handler: (rowValue: T) => void;
   }[];
+  selectedRow?: string | number;
 }
 
 export const Table = <T extends { id: string | number }>({
@@ -39,6 +40,7 @@ export const Table = <T extends { id: string | number }>({
   pagination,
   defaultSortBy,
   rowActions,
+  selectedRow,
 }: TableProps<T>): JSX.Element => {
   const [order, setOrder] = useState<Order>(Order.ASC);
   const [sortBy, setSortBy] = useState<string | null>(typeof defaultSortBy === 'string' ? defaultSortBy : null);
@@ -97,7 +99,7 @@ export const Table = <T extends { id: string | number }>({
         </TableHead>
         <TableBody>
           {(results || []).map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} selected={selectedRow === row.id}>
               {columns.map((column) => (
                 <TableCell key={column.accessor}>
                   {column.renderComponent

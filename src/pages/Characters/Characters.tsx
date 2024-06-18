@@ -51,8 +51,9 @@ export const Characters = () => {
   });
   const [filtersValues, setFiltersValues] = useState<string>(`${Object.values(activeFilters)}`);
   const [page, setPage] = useState<number | null>(null);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCharacterId, setSelectedCharacterId] = useState<Character['id'] | undefined>(undefined);
 
   const { data, error, isLoading, isFetching, status, isError } = useQuery({
     queryKey: [API_PATHS.CHARACTERS, filtersValues, page],
@@ -78,6 +79,7 @@ export const Characters = () => {
           setUrlSearchQuery({
             id: rowValue.id.toString(),
           });
+          setSelectedCharacterId(rowValue.id);
         },
       },
     ];
@@ -88,6 +90,7 @@ export const Characters = () => {
     setUrlSearchQuery({
       page: `${newPage}`,
     });
+    setSelectedCharacterId(undefined);
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +105,7 @@ export const Characters = () => {
       status: activeFilters.status ?? '',
       species: activeFilters.species ?? '',
     });
+    setSelectedCharacterId(undefined);
   };
 
   const handleClearFilters = () => {
@@ -136,6 +140,10 @@ export const Characters = () => {
   const areFiltersFetching = areFiltersInUse && isFetching;
 
   let totalRows = data?.info?.count ?? 0;
+
+  if (rowsPerPage === 5) {
+    totalRows = Math.ceil(totalRows / 4);
+  }
 
   if (rowsPerPage === 10) {
     totalRows = Math.ceil(totalRows / 2);
@@ -175,6 +183,7 @@ export const Characters = () => {
           columns={COLUMNS}
           defaultSortBy="name"
           rowActions={rowActions}
+          selectedRow={selectedCharacterId}
           pagination={
             <TablePagination
               component="div"
@@ -183,7 +192,7 @@ export const Characters = () => {
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              rowsPerPageOptions={[10, 20]}
+              rowsPerPageOptions={[5, 10, 20]}
               labelDisplayedRows={labelDisplayPages}
               showFirstButton
               showLastButton
