@@ -8,7 +8,6 @@ export const deleteUrlSearchQueryByKey = (keys: string[]) => {
   });
 
   const newUrl = `${baseUrl}?${searchParams.toString()}`;
-  console.log(searchParams.toString());
 
   if (newUrl !== currentUrl) {
     window.history.pushState({}, '', newUrl);

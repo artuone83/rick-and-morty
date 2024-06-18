@@ -1,4 +1,4 @@
-import { Avatar, Box, CircularProgress, Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import { API_PATHS } from 'api/const';
@@ -7,6 +7,8 @@ import { Character } from 'api/types/interfaces';
 import { Column, Table } from 'components/Table/Table';
 import { getUrlSearchQuery } from 'utils/getUrlSearchQuery';
 import { EpisodesListCell } from 'components/Table/EpisodesListCell';
+import { ErrorMessage } from 'components/ErrorMessage';
+import { LoadingIndicator } from 'components/LoadingIndicator';
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -37,27 +39,16 @@ export const CharacterDetails = () => {
   });
 
   if (isLoading) {
-    return (
-      <Box>
-        <CircularProgress />
-      </Box>
-    );
+    return <LoadingIndicator />;
   }
 
-  if (error) {
-    return (
-      <Typography variant="body1" color="error">
-        {status.toUpperCase()}: {error.message}
-      </Typography>
-    );
-  }
-
-  return data ? (
+  return (
     <>
+      <ErrorMessage error={error} status={status} />
       <Typography variant="h5" component="p" mb={2} fontWeight="bold">
-        {data.name}
+        {data?.name}
       </Typography>
-      <Table data={[data]} columns={COLUMNS} />
+      <Table data={data ? [data] : []} columns={COLUMNS} />
     </>
-  ) : null;
+  );
 };

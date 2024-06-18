@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { Typography, CircularProgress, TablePagination, Avatar, Box } from '@mui/material';
+import { Typography, TablePagination, Avatar } from '@mui/material';
 
 import { fetchCharacters } from 'api/services/characters';
 import { API_PATHS } from 'api/const';
@@ -15,6 +15,8 @@ import Modal from 'components/modal/Modal';
 import { deleteUrlSearchQueryByKey } from 'utils/deleteUrlSearchQueryByKey';
 import { useUrlSearchQueryFilters } from 'hooks/useUrlSearchQueryFilters';
 import { PageCounter } from 'components/Table/PageCounter';
+import { ErrorMessage } from 'components/ErrorMessage';
+import { LoadingIndicator } from 'components/LoadingIndicator';
 
 const COLUMNS: Column<Character>[] = [
   {
@@ -129,21 +131,6 @@ export const Characters = () => {
     deleteUrlSearchQueryByKey(['id']);
   };
 
-  let errorContent = null;
-
-  if (error) {
-    errorContent = (
-      <>
-        <Typography variant="body1" color="error">
-          {status.toUpperCase()}: Failed to fetch characters
-        </Typography>
-        <Typography variant="body1" color="error">
-          {error instanceof Error ? error.message : ''}
-        </Typography>
-      </>
-    );
-  }
-
   const areFiltersButtonsDisabled =
     isFetching || (!activeFilters.name && !activeFilters.status && !activeFilters.species);
   const areFiltersFetching = Object.values(activeFilters).some((value) => value) && isFetching;
@@ -176,18 +163,10 @@ export const Characters = () => {
         isFetching={areFiltersFetching}
       />
 
-      {errorContent}
+      <ErrorMessage error={error} status={status} />
 
       {isLoading ? (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}>
-          <CircularProgress />
-        </Box>
+        <LoadingIndicator />
       ) : (
         <Table
           data={displayedResults}

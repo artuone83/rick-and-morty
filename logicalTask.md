@@ -10,6 +10,8 @@ You have two empty jugs:
 
 How can you measure exactly 4 litres of water using only these two jugs and an unlimited supply of water?
 
+## Solution
+
 - put 3l water to 3l jug
 - 3/3l
 - 0/5l
