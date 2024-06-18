@@ -36,6 +36,3 @@ How can you measure exactly 4 litres of water using only these two jugs and an u
 - put water from 3l jug to 5l jug
 - 0/3l
 - 4/5l
-
-brad.christensen@rtbhouse.com
-marcin.chrobak@rtbhouse.com

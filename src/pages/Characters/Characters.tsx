@@ -143,7 +143,7 @@ export const Characters = () => {
 
   const totalPages = data?.info?.pages ?? 0;
   const displayedResults = (data?.results || []).slice(0, rowsPerPage);
-  const labelDisplayPages = () => <PageCounter currentPage={page !== null ? page + 1 : 1} totalPages={totalPages} />;
+  const labelDisplayPages = () => <PageCounter currentPage={page === null ? 0 : page + 1} totalPages={totalPages} />;
 
   return (
     <>
@@ -177,7 +177,7 @@ export const Characters = () => {
             <TablePagination
               component="div"
               count={totalRows}
-              page={page || 0}
+              page={page ?? 0}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
