@@ -43,7 +43,7 @@ export const EpisodesListCell = ({ episodes }: EpisodesListCellProps): JSX.Eleme
         position: 'relative',
         overflow: 'auto',
         minWidth: 250,
-        maxHeight: 350,
+        maxHeight: 150,
         padding: 0,
       }}>
       {episodeNames.map((name) => (
