@@ -16,7 +16,7 @@ const boxStyle = {
   boxShadow: 24,
   p: 4,
   width: { xs: '90%', md: '75%' },
-  minHeight: 400,
+  minHeight: 350,
 };
 
 const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element => {
@@ -31,8 +31,7 @@ const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element =>
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-      }}
-    >
+      }}>
       <Paper sx={boxStyle}>
         <IconButton
           aria-label="close"
@@ -42,8 +41,7 @@ const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element =>
             right: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
-          }}
-        >
+          }}>
           <CloseIcon />
         </IconButton>
         <Box mt={4}>{children}</Box>
