@@ -1,12 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { Typography, TablePagination, Avatar } from '@mui/material';
+import { Typography, TablePagination } from '@mui/material';
 
 import { fetchCharacters } from 'api/services/characters';
 import { API_PATHS } from 'api/const';
 import { Character } from 'api/types/interfaces';
 import { CharacterFilters } from 'types/types';
-import { Column, Table } from 'components/Table/Table';
+import { Table } from 'components/Table/Table';
 import { Filters } from './components/Filters';
 import { setUrlSearchQuery } from 'utils/setUrlSearchQuery';
 import { CharacterDetails } from './components/CharacterDetails';
@@ -17,34 +17,12 @@ import { useUrlSearchQueryFilters } from 'hooks/useUrlSearchQueryFilters';
 import { PageCounter } from 'components/Table/PageCounter';
 import { ErrorMessage } from 'components/ErrorMessage';
 import { LoadingIndicator } from 'components/LoadingIndicator';
-
-const COLUMNS: Column<Character>[] = [
-  {
-    label: 'Image',
-    accessor: 'image',
-    renderComponent: (value, rowValue) => (
-      <Avatar alt={rowValue.name} src={value as string} sx={{ width: 56, height: 56 }} />
-    ),
-  },
-  { label: 'Name', accessor: 'name', sortable: true },
-  { label: 'Status', accessor: 'status', sortable: true },
-  { label: 'Species', accessor: 'species', sortable: true },
-  { label: 'Gender', accessor: 'gender', sortable: true },
-  { label: 'Origin', accessor: 'origin.name', sortable: true },
-  { label: 'Location', accessor: 'location.name', sortable: true },
-];
-
-const FILTERS_DEFAULT_VALUES: CharacterFilters = {
-  name: '',
-  status: '',
-  species: '',
-};
+import { FILTERS_DEFAULT_VALUES, rowsPerPageDivisor, COLUMNS, rowsPerPageOptions } from './consts';
 
 export const Characters = () => {
   const nameFilterInput = useRef<HTMLInputElement | null>(null);
   const statusFilterInput = useRef<HTMLInputElement | null>(null);
   const speciesFilterInput = useRef<HTMLInputElement | null>(null);
-  useRef(null);
 
   const [activeFilters, setActiveFilters] = useState<CharacterFilters>({
     ...FILTERS_DEFAULT_VALUES,
@@ -109,9 +87,9 @@ export const Characters = () => {
   };
 
   const handleClearFilters = () => {
-    nameFilterInput.current!.blur();
-    statusFilterInput.current!.blur();
-    speciesFilterInput.current!.blur();
+    nameFilterInput.current?.blur();
+    statusFilterInput.current?.blur();
+    speciesFilterInput.current?.blur();
 
     const newFilters = {
       ...FILTERS_DEFAULT_VALUES,
@@ -135,24 +113,22 @@ export const Characters = () => {
     deleteUrlSearchQueryByKey(['id']);
   };
 
+  const results = data?.results || [];
+  const totalPages = data?.info?.pages ?? 0;
+  let totalRows = data?.info?.count ?? 0;
+  // api returns max 20 results per page
+  // to correctly calculate the total pages, we need to divide the total rows by the rows per page divisor
+  totalRows = Math.ceil(totalRows / (rowsPerPageDivisor[rowsPerPage] || 1));
+  const displayedResults = results.slice(0, rowsPerPage);
+
   const areFiltersInUse = Object.values(activeFilters).some((value) => value);
   const areFiltersButtonsDisabled = isFetching || !areFiltersInUse;
   const areFiltersFetching = areFiltersInUse && isFetching;
+  const isPaginationDisabled = isFetching || results.length < 5;
 
-  let totalRows = data?.info?.count ?? 0;
-
-  if (rowsPerPage === 5) {
-    totalRows = Math.ceil(totalRows / 4);
-  }
-
-  if (rowsPerPage === 10) {
-    totalRows = Math.ceil(totalRows / 2);
-  }
-
-  const totalPages = data?.info?.pages ?? 0;
-  const displayedResults = (data?.results || []).slice(0, rowsPerPage);
-  const labelDisplayPages = () => (
-    <PageCounter currentPage={page === null ? 1 : page + 1} totalPages={totalPages} isError={isError} />
+  const labelDisplayPages = useCallback(
+    () => <PageCounter currentPage={page === null ? 1 : page + 1} totalPages={totalPages} isError={isError} />,
+    [isError, page, totalPages],
   );
 
   return (
@@ -192,8 +168,9 @@ export const Characters = () => {
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              rowsPerPageOptions={[5, 10, 20]}
+              rowsPerPageOptions={rowsPerPageOptions}
               labelDisplayedRows={labelDisplayPages}
+              disabled={isPaginationDisabled}
               showFirstButton
               showLastButton
             />

@@ -10,11 +10,10 @@ interface EpisodesListCellProps {
 }
 
 export const EpisodesListCell = ({ episodes }: EpisodesListCellProps): JSX.Element => {
+  const ids = episodes.map((url) => new URL(url).pathname.split('/').pop());
   const { data, isLoading, error } = useQuery({
-    queryKey: [API_PATHS.EPISODES],
+    queryKey: [API_PATHS.EPISODES, ids],
     queryFn: async (): Promise<Episode[]> => {
-      const ids = episodes.map((url) => new URL(url).pathname.split('/').pop());
-
       const response = await api.get(`/${API_PATHS.EPISODES}/${ids}`);
 
       return response.data;
@@ -44,10 +43,9 @@ export const EpisodesListCell = ({ episodes }: EpisodesListCellProps): JSX.Eleme
         position: 'relative',
         overflow: 'auto',
         minWidth: 250,
-        maxHeight: 350,
+        maxHeight: 150,
         padding: 0,
-      }}
-    >
+      }}>
       {episodeNames.map((name) => (
         <ListItem key={`item-${name}`} sx={{ padding: 0 }} disableGutters>
           <ListItemText primary={name} />
