@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Typography, TablePagination } from '@mui/material';
 
@@ -18,6 +18,7 @@ import { PageCounter } from 'components/Table/PageCounter';
 import { ErrorMessage } from 'components/ErrorMessage';
 import { LoadingIndicator } from 'components/LoadingIndicator';
 import { FILTERS_DEFAULT_VALUES, rowsPerPageDivisor, COLUMNS, rowsPerPageOptions } from './consts';
+import { useOpenModalOnIdUrlSearchParam } from 'hooks/useOpenModalOnIdUrlSearchParam';
 
 export const Characters = () => {
   const nameFilterInput = useRef<HTMLInputElement | null>(null);
@@ -47,6 +48,7 @@ export const Characters = () => {
   });
 
   useUrlSearchQueryFilters(setPage, setActiveFilters);
+  useOpenModalOnIdUrlSearchParam(setIsModalOpen);
 
   const rowActions = useMemo(() => {
     return [
