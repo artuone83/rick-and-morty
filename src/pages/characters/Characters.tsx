@@ -11,7 +11,7 @@ import { Filters } from './components/Filters';
 import { setUrlSearchQuery } from 'utils/setUrlSearchQuery';
 import { CharacterDetails } from './components/CharacterDetails';
 import { deleteUrlSearchQuery } from 'utils/deleteUrlSearchQuery';
-import Modal from 'components/modal/Modal';
+import { Modal } from 'components/modal/Modal';
 import { deleteUrlSearchQueryByKey } from 'utils/deleteUrlSearchQueryByKey';
 import { useUrlSearchQueryFilters } from 'hooks/useUrlSearchQueryFilters';
 import { PageCounter } from 'components/table/PageCounter';
