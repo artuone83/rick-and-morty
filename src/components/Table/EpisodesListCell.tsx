@@ -45,7 +45,8 @@ export const EpisodesListCell = ({ episodes }: EpisodesListCellProps): JSX.Eleme
         minWidth: 250,
         maxHeight: 150,
         padding: 0,
-      }}>
+      }}
+    >
       {episodeNames.map((name) => (
         <ListItem key={`item-${name}`} sx={{ padding: 0 }} disableGutters>
           <ListItemText primary={name} />
