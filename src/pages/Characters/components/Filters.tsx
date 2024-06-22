@@ -73,8 +73,7 @@ export const Filters = ({
             type="submit"
             size="small"
             disabled={buttonsDisabled}
-            endIcon={isFetching ? <CircularProgress size={20} /> : null}
-          >
+            endIcon={isFetching ? <CircularProgress size={20} /> : null}>
             Apply Filters
           </Button>
         </Grid>
@@ -84,8 +83,7 @@ export const Filters = ({
             color="secondary"
             onClick={onClearFiltersClick}
             size="small"
-            disabled={buttonsDisabled}
-          >
+            disabled={buttonsDisabled}>
             Clear Filters
           </Button>
         </Grid>
