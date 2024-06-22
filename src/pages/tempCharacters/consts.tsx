@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
 import { Character } from 'api/types/interfaces';
-import { Column } from 'components/Table/Table';
+import { Column } from 'components/tempTable/Table';
 import { CharacterFilters } from 'types/types';
 
 export const COLUMNS: Column<Character>[] = [

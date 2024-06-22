@@ -1,9 +1,9 @@
 import Container from '@mui/material/Container';
 
 import { PropsWithRequiredChildren } from 'types/types';
-import { Header } from 'components/layout/Header/Header';
-import { Main } from 'components/layout/Main/Main';
-import { Footer } from 'components/layout/Footer/Footer';
+import { Header } from 'components/layout/tempHeader/Header';
+import { Main } from 'components/layout/tempMain/Main';
+import { Footer } from 'components/layout/tempFooter/Footer';
 
 export const PageLayout = ({ children }: PropsWithRequiredChildren): JSX.Element => {
   return (
