@@ -6,7 +6,7 @@ import { fetchCharacterById } from 'api/services/characters';
 import { getUrlSearchQuery } from 'utils/getUrlSearchQuery';
 import { ErrorMessage } from 'components/ErrorMessage';
 import { LoadingIndicator } from 'components/LoadingIndicator';
-import { Table } from 'components/tempTable/Table';
+import { Table } from 'components/table/Table';
 import { COLUMNS } from './consts';
 
 export const CharacterDetails = () => {
