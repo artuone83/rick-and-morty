@@ -7,8 +7,8 @@ export const COLUMNS: Column<Character>[] = [
   {
     label: 'Image',
     accessor: 'image',
-    renderComponent: (value, rowValue) => (
-      <Avatar alt={rowValue.name} src={value as string} sx={{ width: 56, height: 56 }} />
+    renderComponent: (_value, rowValue) => (
+      <Avatar alt={rowValue.name} src={rowValue.image} sx={{ width: 56, height: 56 }} />
     ),
   },
   { label: 'Name', accessor: 'name', sortable: true },

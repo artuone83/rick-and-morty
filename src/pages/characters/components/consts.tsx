@@ -11,6 +11,6 @@ export const COLUMNS: Column<Character>[] = [
   {
     label: 'Episode',
     accessor: 'episode',
-    renderComponent: (value) => <EpisodesListCell episodes={value as string[]} />,
+    renderComponent: (_value, rowValue) => <EpisodesListCell episodes={rowValue.episode} />,
   },
 ];

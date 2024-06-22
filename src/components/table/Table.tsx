@@ -19,7 +19,7 @@ export interface Column<T> {
   label: string;
   accessor: CharacterAccessor<T>;
   sortable?: boolean;
-  renderComponent?: (accessorValue: unknown, rowValue: T) => ReactNode;
+  renderComponent?: (accessorValue: T[keyof T], rowValue: T) => ReactNode;
 }
 
 interface TableProps<T extends object> {
