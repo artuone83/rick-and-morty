@@ -1,4 +1,4 @@
-import { Modal, IconButton, Paper, Box } from '@mui/material';
+import { Modal as MuiModal, IconButton, Paper, Box } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 
 interface ModalProps {
@@ -19,9 +19,9 @@ const boxStyle = {
   minHeight: 350,
 };
 
-const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element => {
+export const Modal = ({ open, onClose, children }: ModalProps): JSX.Element => {
   return (
-    <Modal
+    <MuiModal
       open={open}
       onClose={onClose}
       aria-labelledby="modal-modal-title"
@@ -48,8 +48,6 @@ const CharacterModal = ({ open, onClose, children }: ModalProps): JSX.Element =>
         </IconButton>
         <Box mt={4}>{children}</Box>
       </Paper>
-    </Modal>
+    </MuiModal>
   );
 };
-
-export default CharacterModal;
