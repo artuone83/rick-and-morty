@@ -86,7 +86,8 @@ export const Table = <T extends { id: string | number }>({
                   <TableSortLabel
                     active={sortBy === column.accessor}
                     direction={sortBy === column.accessor ? order : Order.ASC}
-                    onClick={() => handleSort(column.accessor)}>
+                    onClick={() => handleSort(column.accessor)}
+                  >
                     {column.label}
                   </TableSortLabel>
                 ) : (
@@ -115,7 +116,8 @@ export const Table = <T extends { id: string | number }>({
                       variant="outlined"
                       color="info"
                       onClick={() => action.handler(row)}
-                      size="small">
+                      size="small"
+                    >
                       {action.name}
                     </Button>
                   ))}
