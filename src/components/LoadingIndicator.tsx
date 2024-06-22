@@ -9,7 +9,8 @@ export const LoadingIndicator = () => {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-      }}>
+      }}
+    >
       <CircularProgress />
     </Box>
   );

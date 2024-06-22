@@ -13,7 +13,8 @@ export const Header = (): JSX.Element => {
         alignItems: 'center',
         gap: 2,
         position: 'relative',
-      }}>
+      }}
+    >
       <Logo width={60} height={60} />
     </Box>
   );
