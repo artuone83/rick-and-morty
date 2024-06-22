@@ -1,6 +1,6 @@
 import { Character } from 'api/types/interfaces';
-import { EpisodesListCell } from 'components/Table/EpisodesListCell';
-import { Column } from 'components/Table/Table';
+import { EpisodesListCell } from 'components/tempTable/EpisodesListCell';
+import { Column } from 'components/tempTable/Table';
 
 export const COLUMNS: Column<Character>[] = [
   { label: 'Status', accessor: 'status' },
