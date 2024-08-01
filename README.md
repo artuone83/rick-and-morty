@@ -29,23 +29,23 @@ This project uses the following dependencies:
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository.
 
-```bash
-https://github.com/artuone83/rick-and-morty
-```
+   ```bash
+   https://github.com/artuone83/rick-and-morty
+   ```
 
-2. Navigate to the project directory:
+2. Navigate to the project directory.
 
-```bash
-cd rick-and-morty
-```
+   ```bash
+   cd rick-and-morty
+   ```
 
-3. Install the dependencies:
+3. Install the dependencies.
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
@@ -102,22 +102,22 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Objective:
+## Objective
 
 Develop an application that fetches character data from the Rick and Morty API, displays it in a responsive, paginated table using Material-UI, and allows users to view all character details in a modal dialog.
 
 ## Requirements
 
-### Setup and Project Structure:
+### Setup and Project Structure
 
 Initialize a new React project with TypeScript and install necessary packages (create-react-app with TypeScript template, Material-UI, axios for API requests).
 Organize the project into components and utilities.
 
-### API Integration:
+### API Integration
 
-Fetch character data from the Rick and Morty API (https://rickandmortyapi.com/api/character).
+Fetch character data from the Rick and Morty API [rickandmortyapi/character](https://rickandmortyapi.com/api/character).
 
-### Components:
+### Components
 
 - App Component: Serves as the container for all other components.
 - Character Table Component: Uses Material-UI's Table components to display characters. Include features for pagination, sorting, and editing.
@@ -129,22 +129,22 @@ Fetch character data from the Rick and Morty API (https://rickandmortyapi.com/ap
     - Species
 - Character Details Dialog: A modal dialog that opens when the "Details" button in a table row is clicked, allowing users to view all of the character details.
 
-### Functionality:
+### Functionality
 
 - Pagination: : Implement pagination to control the amount of data displayed at once, using Material-UI Pagination.
 - Sorting: Allow the user to sort the table by character ID, name, status, and species.
 - View Details: Each row should have a button that, when clicked, opens a modal dialog showing detailed information about the character in a nicely formatted way.
 
-### State Management:
+### State Management
 
 - Use React's Context API or useState and useEffect hooks to manage and persist state.
 - Optionally, use Redux for state management to show advanced skills
 
-### Types:
+### Types
 
 - Define TypeScript interfaces or types for the character data and any props passed to components.
 
-### Styling:
+### Styling
 
 - Use Material-UI for all UI elements to ensure a cohesive look and feel.
 - Ensure the application is responsive and maintains layout integrity on different screen sizes.
@@ -157,12 +157,12 @@ Fetch character data from the Rick and Morty API (https://rickandmortyapi.com/ap
 - Use Material-UI themes to customize the color scheme.
 - Use TanStack Query for data fetching
 
-### Deliverables:
+### Deliverables
 
 - A GitHub/Gitlab repository (or compressed file of a repository) containing the source code.
 - A ‘README.md’ file with instructions on how to set up and run the project, including any necessary installation steps
 
-### Evaluation criteria:
+### Evaluation criteria
 
 - Correct implementation of features as per requirements.
 - Code quality, readability, and use of TypeScript for type safety.
